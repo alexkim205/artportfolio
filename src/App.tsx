@@ -17,14 +17,20 @@ import Logo from "../public/android-chrome-192x192.png"
 
 
 function Sidebar({onClick}:{onClick?: ()=>void}): JSX.Element {
-    const {currentCategory} = useValues(coreLogic)
+    const {currentCategory, presentationMode} = useValues(coreLogic)
     const {setCategory} = useActions(coreLogic)
+    const [logoHovered, setLogoHovered] = useState(false)
 
     return (
         <>
-            <a className="hidden md:block cursor-cell overflow-hidden bg-blue-700 hover:bg-black mb-1" href="https://www.instagram.com/alexs_sketchpad/" target="_blank">
-                <LazyLoadImage src={Logo} className="w-20 aspect-square p-2" style={{
-                    filter: "invert(100%) sepia(33%) saturate(0%) hue-rotate(231deg) brightness(106%) contrast(101%)"
+            <a
+                onMouseEnter={() => setLogoHovered(true)}
+                onMouseLeave={() => setLogoHovered(false)}
+                onTouchStart={() => setLogoHovered(true)}
+                onTouchEnd={() => setLogoHovered(false)}
+                className="hidden md:block cursor-cell overflow-hidden transition duration-75 dark:bg-inherit hover:bg-blue-700 mb-1" href="https://www.instagram.com/alexs_sketchpad/" target="_blank">
+                <LazyLoadImage src={Logo} className="w-24 aspect-square p-2 mb-1" style={{
+                    filter: logoHovered ? "invert(100%) sepia(33%) saturate(0%) hue-rotate(231deg) brightness(106%) contrast(101%)" : presentationMode ? "invert(47%) sepia(9%) saturate(581%) hue-rotate(182deg) brightness(93%) contrast(91%)" : undefined
                 }}/>
             </a>
 
