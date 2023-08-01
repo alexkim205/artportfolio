@@ -42,7 +42,7 @@ function Media({image}: { image: PieceType }): JSX.Element {
                     <div className="shrink-0 min-w-0"/>
                 </Transition>
             </div>
-            <div className="w-full flex justify-center items-center duration-75">
+            <div className={clsx("w-full flex justify-center items-center duration-75", !loaded && "bg-gray-200 animate-pulse")}>
                 {isImage ? (
                     <LazyLoadImage key={image.id} className="max-h-[450px]" style={image.style} afterLoad={() => {
                         setLoaded(true)
@@ -58,34 +58,23 @@ function Media({image}: { image: PieceType }): JSX.Element {
                     </LazyLoadComponent>
                 )}
             </div>
-            <Transition
-                as={Fragment}
-                show={loaded}
-                enter="transition-opacity duration-75"
-                enterFrom="opacity-0"
-                enterTo="opacity-100"
-                leave="transition-opacity duration-75"
-                leaveFrom="opacity-100"
-                leaveTo="opacity-0"
-            >
-                <div className="shrink-0 md:w-[200px] dark:md:w-[100px] dark:lg:w-[200px] lg:w-[200px]">
-                    <Transition
-                        as="div"
-                        className="flex flex-col gap-1.5 shrink-0 md:p-0 p-4"
-                        show={!presentationMode}
-                        enter="transition-transform duration-75"
-                        enterFrom="translate-x-full"
-                        enterTo="translate-x-0"
-                        leave="transition-transform duration-75"
-                        leaveFrom="translate-x-0"
-                        leaveTo="translate-x-full"
-                    >
+            <div className="shrink-0 md:w-[200px] dark:md:w-[100px] dark:lg:w-[200px] lg:w-[200px]">
+                <Transition
+                    as="div"
+                    className="flex flex-col gap-1.5 shrink-0 md:p-0 p-4"
+                    show={!presentationMode}
+                    enter="transition-transform duration-75"
+                    enterFrom="translate-x-full"
+                    enterTo="translate-x-0"
+                    leave="transition-transform duration-75"
+                    leaveFrom="translate-x-0"
+                    leaveTo="translate-x-full"
+                >
 
-                        <p className="text-xs sm:text-sm text-gray-400">{image.date.format("MMM D, YYYY")}</p>
-                        <p className="text-sm grow">{image.blurb}</p>
-                    </Transition>
-                </div>
-            </Transition>
+                    <p className="text-xs sm:text-sm text-gray-400">{image.date.format("MMM D, YYYY")}</p>
+                    <p className="text-sm grow">{image.blurb}</p>
+                </Transition>
+            </div>
         </div>
     )
 }
