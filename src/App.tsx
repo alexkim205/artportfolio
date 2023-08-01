@@ -12,6 +12,8 @@ import {
 } from "react-icons/pi";
 import {useState} from "react";
 import {Transition} from "@headlessui/react";
+import {LazyLoadImage} from "react-lazy-load-image-component";
+import Logo from "../public/android-chrome-192x192.png"
 
 
 function Sidebar({onClick}:{onClick?: ()=>void}): JSX.Element {
@@ -20,6 +22,12 @@ function Sidebar({onClick}:{onClick?: ()=>void}): JSX.Element {
 
     return (
         <>
+            <a className="hidden md:block cursor-cell overflow-hidden bg-blue-700 hover:bg-black mb-1" href="https://www.instagram.com/alexs_sketchpad/" target="_blank">
+                <LazyLoadImage src={Logo} className="w-20 aspect-square p-2" style={{
+                    filter: "invert(100%) sepia(33%) saturate(0%) hue-rotate(231deg) brightness(106%) contrast(101%)"
+                }}/>
+            </a>
+
             {categories.map(category =>
                 <a
                     key={category}
@@ -89,6 +97,9 @@ function Header(): JSX.Element {
                 >
                     <VisibleMenuIcon className={clsx("shrink-0 text-4xl md:text-3xl cursor-cell dark:fill-white")}/>
                 </div>
+                <a className="flex justify-center items-center hover:scale-110 h-full md:hidden cursor-cell overflow-hidden" href="https://www.instagram.com/alexs_sketchpad/" target="_blank">
+                    <LazyLoadImage src={Logo} className="w-14 aspect-square p-1"/>
+                </a>
                 <div className="p-3 rounded-full bg-inherit"
                      onTouchStart={() => setPresentationHovered(true)}
                      onTouchEnd={() => setPresentationHovered(false)}
