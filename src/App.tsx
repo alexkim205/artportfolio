@@ -18,7 +18,7 @@ function Sidebar(): JSX.Element {
                     key={category}
                     className={clsx(
                         `px-1 cursor-cell`,
-                        category === currentCategory ? "text-white dark:bg-indigo-700 bg-indigo-800 font-semibold text-lg" : `text-sm dark:text-gray-300 text-gray-500 hover:text-white dark:hover:bg-indigo-700 hover:bg-indigo-800`
+                        category === currentCategory ? "text-white bg-blue-700 font-semibold text-lg" : `text-sm dark:text-gray-500 text-gray-500 dark:hover:text-white hover:text-white hover:bg-blue-700`
                     )}
                     href={`#${category}`}
                     onClick={() => {
@@ -60,9 +60,9 @@ function App() {
             )}>
                 <Sidebar/>
             </div>
+            <Header/>
             <div
                 className={clsx("flex flex-col relative transition-colors duration-75 justify-start items-center pt-32 pb-32 md:pt-24 md:pb-24 grow gap-6 md:gap-12 dark:bg-black bg-white")}>
-                <Header/>
                 <Gallery images={filteredPieces}/>
             </div>
         </div>
