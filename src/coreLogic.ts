@@ -8,7 +8,8 @@ export const coreLogic = kea<coreLogicType>([
     actions(() => ({
         setCategory: (category: string) => ({category}),
         addVisiblePiece: (id: PieceType["id"]) => ({id}),
-        removeVisiblePiece: (id: PieceType["id"]) => ({id})
+        removeVisiblePiece: (id: PieceType["id"]) => ({id}),
+        setPresentationMode: (presentationMode: boolean) => ({presentationMode})
     })),
     reducers({
         currentCategory: [
@@ -22,6 +23,12 @@ export const coreLogic = kea<coreLogicType>([
             {
                 addVisiblePiece: (oldSet, {id}) => new Set([...oldSet, id]),
                 removeVisiblePiece: (oldSet, {id}) => new Set([...oldSet].filter(x => x !== id))
+            }
+        ],
+        presentationMode: [
+            false,
+            {
+                setPresentationMode: (_,{presentationMode}) => presentationMode
             }
         ]
     }),

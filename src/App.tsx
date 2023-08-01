@@ -3,45 +3,68 @@ import {Gallery} from "./Gallery";
 import {useActions, useValues} from 'kea'
 import {coreLogic} from "./coreLogic";
 import clsx from "clsx";
+import {PiEyeClosedDuotone, PiEyeDuotone} from "react-icons/pi";
+import {useState} from "react";
 
 
-function App() {
-    const {currentCategory, filteredPieces, visiblePieces} = useValues(coreLogic)
+function Sidebar(): JSX.Element {
+    const {currentCategory} = useValues(coreLogic)
     const {setCategory} = useActions(coreLogic)
 
     return (
-        <div className="w-full h-full flex flex-row">
-            <div className="flex flex-col justify-center items-start p-6 shrink-0 w-52 fixed h-screen z-10 gap-8">
-                <div className="flex flex-col justify-center items-start gap-0.5">
-                    {categories.map(category =>
-                        <a
-                            key={category}
-                            className={clsx(
-                                `px-1 cursor-cell`,
-                                category === currentCategory ? "text-white bg-indigo-800 font-semibold text-lg" : "text-sm text-gray-500 hover:text-white hover:bg-indigo-800"
-                            )}
-                            href={`#${category}`}
-                            onClick={() => {
-                                setCategory(category)
-                            }}
-                        >
-                            {category}
-                        </a>)}
-                </div>
-                <div className="w-full flex flex-col justify-center items-start gap-1 grow h-full">
-                    {/*{[0,1,2,3,4].map((offset) =>*/}
-                    {/*    <div*/}
-                    {/*        key={`${block.id}-block`}*/}
-                    {/*        onClick={() => {*/}
-                    {/*            document.getElementById(block.id)?.scrollIntoView()*/}
-                    {/*        }}*/}
-                    {/*        className={clsx(`flex justify-center items-center text-xs text-gray-400 w-8 h-2 rounded-sm hover:bg-gray-300 transition-colors cursor-cell bg-gray-100`, visiblePieces.has(block.id) && "bg-gray-200")}>*/}
-                    {/*        {visiblePieces.has(block.id) && (index + 1)}*/}
-                    {/*    </div>*/}
-                    {/*)}*/}
-                </div>
+        <>
+            {categories.map(category =>
+                <a
+                    key={category}
+                    className={clsx(
+                        `px-1 cursor-cell`,
+                        category === currentCategory ? "text-white dark:bg-indigo-700 bg-indigo-800 font-semibold text-lg" : `text-sm dark:text-gray-300 text-gray-500 hover:text-white dark:hover:bg-indigo-700 hover:bg-indigo-800`
+                    )}
+                    href={`#${category}`}
+                    onClick={() => {
+                        setCategory(category)
+                    }}
+                >
+                    {category}
+                </a>)}
+        </>
+    )
+}
+
+function Header(): JSX.Element {
+    const {presentationMode} = useValues(coreLogic)
+    const {setPresentationMode} = useActions(coreLogic)
+    const Icon = presentationMode ? PiEyeDuotone : PiEyeClosedDuotone
+    const OppositeIcon = presentationMode ? PiEyeClosedDuotone : PiEyeDuotone
+    const [hovered, setHovered] = useState(false)
+
+    const VisibleIcon = hovered ? OppositeIcon : Icon
+
+    return (
+        <div className="flex flex-row justify-end items-center h-12 md:h-16 md:mr-1 w-full md:w-auto fixed z-10 top-0 left-0 right-0 shrink-0 bg-white dark:bg-black md:bg-transparent dark:md:bg-transparent duration-75 transition-colors">
+            <div className="p-3 rounded-full bg-inherit" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}
+                 onClick={() => setPresentationMode(!presentationMode)}>
+                <VisibleIcon className={clsx("shrink-0 text-3xl md:text-3xl cursor-cell dark:fill-white")}/>
             </div>
-            <Gallery images={filteredPieces}/>
+        </div>
+    )
+}
+
+function App() {
+    const {filteredPieces, presentationMode} = useValues(coreLogic)
+
+    return (
+        <div className={clsx("w-full flex flex-row bg-transparent", presentationMode && "dark")}>
+            <div className={clsx(
+                "transition-colors dark:bg-black bg-white duration-75 flex flex-row md:flex-nowrap flex-wrap md:flex-col top-10 md:top-0 left-0 justify-center md:justify-start md:w-52 md:items-start items-center px-3 pt-0 pb-3 py-3 md:px-6 md:py-6 shrink-0 w-full fixed z-20 gap-1 md:gap-0.5",
+            )}>
+                <Sidebar/>
+            </div>
+            <div
+                className={clsx("flex flex-col relative transition-colors duration-75 justify-start items-center pt-32 pb-32 md:pt-24 md:pb-24 grow gap-6 md:gap-12 dark:bg-black bg-white")}>
+                <Header/>
+                <Gallery images={filteredPieces}/>
+            </div>
         </div>
     )
 }
