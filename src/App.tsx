@@ -10,29 +10,19 @@ import {
     PiEyeClosedDuotone,
     PiEyeDuotone
 } from "react-icons/pi";
-import {useState} from "react";
+import {CSSProperties, useState} from "react";
 import {Transition} from "@headlessui/react";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import Logo from "../public/android-chrome-192x192.png"
 
 
 function Sidebar({onClick}:{onClick?: ()=>void}): JSX.Element {
-    const {currentCategory, presentationMode} = useValues(coreLogic)
+    const {currentCategory} = useValues(coreLogic)
     const {setCategory} = useActions(coreLogic)
-    const [logoHovered, setLogoHovered] = useState(false)
 
     return (
         <>
-            <a
-                onMouseEnter={() => setLogoHovered(true)}
-                onMouseLeave={() => setLogoHovered(false)}
-                onTouchStart={() => setLogoHovered(true)}
-                onTouchEnd={() => setLogoHovered(false)}
-                className="hidden md:block cursor-cell overflow-hidden transition duration-75 dark:bg-inherit dark:hover:bg-blue-700 hover:bg-blue-700 mb-1" href="https://www.instagram.com/alexs_sketchpad/" target="_blank">
-                <LazyLoadImage src={Logo} className="w-24 aspect-square p-2 mb-1" style={{
-                    filter: logoHovered ? "invert(100%) sepia(33%) saturate(0%) hue-rotate(231deg) brightness(106%) contrast(101%)" : presentationMode ? "invert(47%) sepia(9%) saturate(581%) hue-rotate(182deg) brightness(93%) contrast(91%)" : undefined
-                }}/>
-            </a>
+            <LogoIcon iconClassName="w-24" className="hidden md:block dark:hover:bg-blue-700 hover:bg-blue-700 mb-1" interactive/>
 
             {categories.map(category =>
                 <a
@@ -50,6 +40,24 @@ function Sidebar({onClick}:{onClick?: ()=>void}): JSX.Element {
                     {category}
                 </a>)}
         </>
+    )
+}
+
+function LogoIcon({iconClassName, className, interactive}:{iconClassName?: string, className?: string, interactive?: boolean}): JSX.Element{
+    const { presentationMode} = useValues(coreLogic)
+    const [logoHovered, setLogoHovered] = useState(false)
+
+    return (
+        <a
+            onMouseEnter={() => setLogoHovered(true)}
+            onMouseLeave={() => setLogoHovered(false)}
+            onTouchStart={() => setLogoHovered(true)}
+            onTouchEnd={() => setLogoHovered(false)}
+            className={clsx(className, "cursor-cell overflow-hidden transition duration-75 dark:bg-inherit")} href="https://www.instagram.com/alexs_sketchpad/" target="_blank">
+            <LazyLoadImage src={Logo} className={clsx(iconClassName, "aspect-square p-2")} style={{
+                filter: interactive && logoHovered ? "invert(100%) sepia(33%) saturate(0%) hue-rotate(231deg) brightness(106%) contrast(101%)" : presentationMode ? "invert(47%) sepia(9%) saturate(581%) hue-rotate(182deg) brightness(93%) contrast(91%)" : undefined
+            }}/>
+        </a>
     )
 }
 
@@ -103,9 +111,7 @@ function Header(): JSX.Element {
                 >
                     <VisibleMenuIcon className={clsx("shrink-0 text-4xl md:text-3xl cursor-cell dark:fill-white")}/>
                 </div>
-                <a className="flex justify-center items-center hover:scale-110 h-full md:hidden cursor-cell overflow-hidden" href="https://www.instagram.com/alexs_sketchpad/" target="_blank">
-                    <LazyLoadImage src={Logo} className="w-14 aspect-square p-1"/>
-                </a>
+                <LogoIcon iconClassName="w-16" className="md:hidden block dark:hover:scale-110 hover:scale-110" />
                 <div className="p-3 rounded-full bg-inherit"
                      onTouchStart={() => setPresentationHovered(true)}
                      onTouchEnd={() => setPresentationHovered(false)}
