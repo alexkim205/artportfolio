@@ -68,7 +68,7 @@ function Header(): JSX.Element {
             >
                 <div className="p-3">
                     <PiArrowsInSimple onClick={() => setMenuOpen(false)}
-                                      className={clsx("w-[30px] h-[30px] shrink-0 rotate-[135deg] text-3xl md:text-3xl cursor-cell dark:fill-white")}/>
+                                      className={clsx("w-[36px] h-[36px] shrink-0 rotate-[135deg] text-4xl cursor-cell dark:fill-white")}/>
                 </div>
                 <div
                     className="flex flex-col px-6 pt-3 pb-6 justify-start items-start gap-1"
@@ -79,7 +79,7 @@ function Header(): JSX.Element {
                 </div>
             </Transition>
             <div
-                className="flex flex-row justify-between items-center h-14 md:h-16 md:mr-1 w-full md:w-auto fixed z-10 top-0 left-0 right-0 shrink-0 bg-white dark:bg-black md:bg-transparent dark:md:bg-transparent duration-75 transition-colors">
+                className="flex flex-row justify-between items-center md:h-16 md:mr-1 w-full md:w-auto fixed z-10 top-0 left-0 right-0 shrink-0 bg-white dark:bg-black md:bg-transparent dark:md:bg-transparent duration-75 transition-colors">
                 <div className="md:invisible p-3 rounded-full bg-inherit"
                      onTouchStart={() => setMenuHovered(true)}
                      onTouchEnd={() => setMenuHovered(false)}
@@ -87,7 +87,7 @@ function Header(): JSX.Element {
                      onMouseLeave={() => setMenuHovered(false)}
                      onClick={() => setMenuOpen(true)}
                 >
-                    <VisibleMenuIcon className={clsx("shrink-0 text-3xl md:text-3xl cursor-cell dark:fill-white")}/>
+                    <VisibleMenuIcon className={clsx("shrink-0 text-4xl md:text-3xl cursor-cell dark:fill-white")}/>
                 </div>
                 <div className="p-3 rounded-full bg-inherit"
                      onTouchStart={() => setPresentationHovered(true)}
@@ -98,7 +98,7 @@ function Header(): JSX.Element {
 
                 >
                     <VisiblePresentationIcon
-                        className={clsx("shrink-0 text-3xl md:text-3xl cursor-cell dark:fill-white")}/>
+                        className={clsx("shrink-0 text-5xl md:text-3xl cursor-cell dark:fill-white")}/>
                 </div>
             </div>
         </>
