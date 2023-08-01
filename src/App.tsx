@@ -57,7 +57,7 @@ function Header(): JSX.Element {
             <Transition
                 show={menuOpen}
                 as="div"
-                className="md:hidden h-screen w-screen bg-white dark:bg-black fixed z-20"
+                className="flex flex-col justify-start items-start md:hidden h-screen w-screen bg-white dark:bg-black fixed z-20"
                 unmount
                 enter="transition-transform ease-in-out duration-150"
                 enterFrom="-translate-y-full"
@@ -66,9 +66,9 @@ function Header(): JSX.Element {
                 leaveFrom="translate-y-0"
                 leaveTo="-translate-y-full"
             >
-                <div className="p-3">
+                <div className="flex justify-center items-center p-3 rounded-full bg-inherit h-[72px] ">
                     <PiArrowsInSimple onClick={() => setMenuOpen(false)}
-                                      className={clsx("w-[36px] h-[36px] shrink-0 rotate-[135deg] text-4xl cursor-cell dark:fill-white")}/>
+                                      className={clsx("shrink-0 rotate-[135deg] text-4xl cursor-cell dark:fill-white")}/>
                 </div>
                 <div
                     className="flex flex-col px-6 pt-3 pb-6 justify-start items-start gap-1"
