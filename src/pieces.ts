@@ -564,4 +564,4 @@ pieces.forEach((piece) => {
 
 export const categoryToPieces = _categoryToPieces
 
-export const categories = ["all", ...Object.keys(categoryToPieces)]
+export const categories = ["all", ...Object.keys(categoryToPieces).sort((a,b) => a.localeCompare(b))]

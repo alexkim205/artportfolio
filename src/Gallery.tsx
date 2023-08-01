@@ -1,17 +1,32 @@
 import {PieceType} from "./pieces";
 import {LazyLoadComponent, LazyLoadImage} from "react-lazy-load-image-component";
 import 'react-lazy-load-image-component/src/effects/black-and-white.css';
-import {Fragment, useState} from "react";
+import {Fragment, useEffect, useRef, useState} from "react";
 import {Transition} from '@headlessui/react'
+import useOnScreen from "./useOnScreen";
+import {useActions} from "kea";
+import {coreLogic} from "./coreLogic";
+import clsx from "clsx";
 
 function Media({image}: { image: PieceType }): JSX.Element {
     const [loaded, setLoaded] = useState(false)
-
+    const ref = useRef<HTMLDivElement>(null)
+    const isVisible = useOnScreen(ref)
     const isImage = image.file.toLowerCase().endsWith(".png") || image.file.toLowerCase().endsWith(".jpg")
 
+    const {addVisiblePiece, removeVisiblePiece} = useActions(coreLogic)
+
+    useEffect(() => {
+        if (isVisible) {
+            addVisiblePiece(image.id)
+        } else {
+            removeVisiblePiece(image.id)
+        }
+    }, [isVisible])
+
     return (
-        <div key={image.id}
-             className="flex flex-row justify-center gap-8 w-full min-w-[400px] p-4 max-w-[85rem] opacity-100 transition-opacity cursor-cell last:pb-[225px]">
+        <div id={image.id} ref={ref} key={image.id}
+             className={clsx("flex flex-row justify-center gap-8 w-full min-w-[400px] p-4 max-w-[85rem] transition-opacity cursor-cell last:pb-[225px]", isVisible ? "opacity-100" : "opacity-30")}>
             <div className="w-full flex justify-center items-center ml-[200px]">
                 {isImage ? (
                     <LazyLoadImage key={image.id} className="max-h-[450px]" style={image.style} afterLoad={() => {
