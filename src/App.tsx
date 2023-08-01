@@ -54,15 +54,15 @@ function App() {
     const {filteredPieces, presentationMode} = useValues(coreLogic)
 
     return (
-        <div className={clsx("w-full flex flex-row bg-transparent", presentationMode && "dark")}>
+        <div className={clsx("w-full flex overflow-hidden flex-row bg-transparent", presentationMode && "dark")}>
             <div className={clsx(
-                "transition-colors dark:bg-black bg-white duration-75 flex flex-row md:flex-nowrap flex-wrap md:flex-col top-10 md:top-0 left-0 justify-center md:justify-start md:w-52 md:items-start items-center px-3 pt-0 pb-3 py-3 md:px-6 md:py-6 shrink-0 w-full fixed z-20 gap-1 md:gap-0.5",
+                "transition-colors min-w-[400px] md:min-w-fit dark:bg-black bg-white duration-75 flex flex-row md:flex-nowrap flex-wrap md:flex-col top-10 md:top-0 left-0 justify-center md:justify-start md:w-fit md:items-start items-center px-3 pt-0 pb-3 py-3 md:px-6 md:py-6 shrink-0 w-full fixed z-20 gap-1 md:gap-0.5",
             )}>
                 <Sidebar/>
             </div>
             <Header/>
             <div
-                className={clsx("flex flex-col relative transition-colors duration-75 justify-start items-center pt-32 pb-32 md:pt-24 md:pb-24 grow gap-6 md:gap-12 dark:bg-black bg-white")}>
+                className={clsx("flex flex-col relative transition-colors duration-75 justify-start items-center py-24 grow gap-6 md:gap-12 dark:bg-black bg-white")}>
                 <Gallery images={filteredPieces}/>
             </div>
         </div>
