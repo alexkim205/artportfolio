@@ -27,7 +27,7 @@ function Media({image}: { image: PieceType }): JSX.Element {
 
     return (
         <div id={image.id} ref={ref} key={image.id}
-             className={clsx("flex flex-col md:flex-row justify-center gap-4 md:gap-8 w-full p-0 md:p-6 max-w-[85rem] transition-opacity cursor-cell last:pb-[225px]", isVisible ? "opacity-100" : "opacity-30")}>
+             className={clsx("flex flex-col md:flex-row justify-center gap-4 md:gap-8 w-full p-0 md:p-6 max-w-[85rem] transition-opacity cursor-cell first:-mt-4 last:pb-[225px]", isVisible ? "opacity-100" : "opacity-30")}>
             <div className="shrink-0 w-0 md:w-[100px] lg:w-[200px]">
                 <Transition
                     as={Fragment}

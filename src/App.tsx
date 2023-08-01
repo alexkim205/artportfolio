@@ -144,7 +144,7 @@ function App() {
             </div>
             <Header/>
             <div
-                className={clsx("flex flex-col relative transition-colors duration-75 justify-start items-center py-16 md:py-24 grow gap-6 md:gap-12 dark:bg-black bg-white")}>
+                className={clsx("flex flex-col relative transition-colors duration-75 justify-start items-center pb-16 md:py-32 grow gap-6 md:gap-12 dark:bg-black bg-white")}>
                 <Gallery images={filteredPieces}/>
             </div>
         </div>
