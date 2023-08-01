@@ -79,29 +79,29 @@ function Header(): JSX.Element {
             <Transition
                 show={menuOpen}
                 as="div"
-                className="flex flex-col justify-start items-start md:hidden h-screen w-screen bg-white dark:bg-black fixed z-20"
+                className="flex flex-col justify-end items-start md:hidden h-screen w-screen bg-white dark:bg-black fixed z-20"
                 unmount
                 enter="transition-transform ease-in-out duration-150"
-                enterFrom="-translate-y-full"
+                enterFrom="translate-y-full"
                 enterTo="translate-y-0"
                 leave="transition-transform ease-in-out duration-150"
                 leaveFrom="translate-y-0"
-                leaveTo="-translate-y-full"
+                leaveTo="translate-y-full"
             >
-                <div className="flex justify-center items-center p-3 rounded-full bg-inherit h-[72px] ">
-                    <PiArrowsInSimple onClick={() => setMenuOpen(false)}
-                                      className={clsx("shrink-0 rotate-[135deg] text-4xl cursor-cell dark:fill-white")}/>
-                </div>
                 <div
-                    className="flex flex-col px-6 pt-3 pb-6 justify-start items-start gap-1"
+                    className="flex flex-col px-6 pt-6 pb-3 justify-start items-start gap-1"
                 >
                     <Sidebar onClick={() => {
                         setMenuOpen(false)
                     }}/>
                 </div>
+                <div className="flex justify-center items-center p-3 rounded-full bg-inherit h-[72px] ">
+                    <PiArrowsInSimple onClick={() => setMenuOpen(false)}
+                                      className={clsx("shrink-0 rotate-[135deg] text-4xl cursor-cell dark:fill-white")}/>
+                </div>
             </Transition>
             <div
-                className="flex flex-row justify-between items-center md:h-16 md:mr-1 w-full md:w-auto fixed z-10 top-0 left-0 right-0 shrink-0 bg-white dark:bg-black md:bg-transparent dark:md:bg-transparent duration-75 transition-colors">
+                className="border-t md:border-t-0 flex flex-row justify-between items-center md:h-16 md:mr-1 w-full md:w-auto fixed z-10 bottom-0 left-0 right-0 shrink-0 bg-white dark:bg-black md:bg-transparent dark:md:bg-transparent duration-75 transition-colors">
                 <div className="md:invisible p-3 rounded-full bg-inherit"
                      onTouchStart={() => setMenuHovered(true)}
                      onTouchEnd={() => setMenuHovered(false)}
