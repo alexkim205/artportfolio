@@ -79,7 +79,7 @@ function Header(): JSX.Element {
             <Transition
                 show={menuOpen}
                 as="div"
-                className="flex flex-col justify-end items-start md:hidden h-full w-screen bg-white dark:bg-black fixed z-20"
+                className="flex flex-col justify-end items-start md:hidden bg-white dark:bg-black fixed inset-0 z-20"
                 unmount
                 enter="transition-transform ease-in-out duration-150"
                 enterFrom="translate-y-full"
