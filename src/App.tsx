@@ -10,7 +10,7 @@ import {
     PiEyeClosedDuotone,
     PiEyeDuotone
 } from "react-icons/pi";
-import {CSSProperties, useState} from "react";
+import {useState} from "react";
 import {Transition} from "@headlessui/react";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import Logo from "../public/android-chrome-192x192.png"
