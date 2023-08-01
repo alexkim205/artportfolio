@@ -16,8 +16,8 @@ function App() {
                     <a
                         key={category}
                         className={clsx(
-                            `text-sm px-1`,
-                            category === currentCategory ? "text-white bg-black" : "text-gray-500 hover:text-white hover:bg-black"
+                            `text-sm px-1 cursor-cell`,
+                            category === currentCategory ? "text-white bg-indigo-800 font-semibold text-lg" : "text-gray-500 hover:text-white hover:bg-indigo-800"
                         )}
                         href={`#${category}`}
                         onClick={() => {
