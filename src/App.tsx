@@ -101,7 +101,7 @@ function Header(): JSX.Element {
                 </div>
             </Transition>
             <div
-                className="border-t md:border-t-0 flex flex-row justify-between items-center md:h-16 md:mr-1 w-full md:w-auto fixed z-10 bottom-0 left-0 right-0 shrink-0 bg-white dark:bg-black md:bg-transparent dark:md:bg-transparent duration-75 transition-colors">
+                className="border-t md:border-t-0 flex flex-row justify-between items-center md:h-16 md:mr-1 w-full md:w-auto fixed z-10 md:top-0 bottom-0 left-0 right-0 shrink-0 bg-white dark:bg-black md:bg-transparent dark:md:bg-transparent duration-75 transition-colors">
                 <div className="md:invisible p-3 rounded-full bg-inherit"
                      onTouchStart={() => setMenuHovered(true)}
                      onTouchEnd={() => setMenuHovered(false)}
