@@ -10,7 +10,7 @@ import {
     PiEyeClosedDuotone,
     PiEyeDuotone
 } from "react-icons/pi";
-import {useState} from "react";
+import {CSSProperties, useState} from "react";
 import {Transition} from "@headlessui/react";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import Logo from "../public/android-chrome-192x192.png"
@@ -43,7 +43,7 @@ function Sidebar({onClick}:{onClick?: ()=>void}): JSX.Element {
     )
 }
 
-function LogoIcon({iconClassName, className, interactive}:{iconClassName?: string, className?: string, interactive?: boolean}): JSX.Element{
+function LogoIcon({iconClassName, className, interactive, style}:{iconClassName?: string, className?: string, interactive?: boolean, style?: CSSProperties}): JSX.Element{
     const { presentationMode} = useValues(coreLogic)
     const [logoHovered, setLogoHovered] = useState(false)
 
@@ -54,8 +54,8 @@ function LogoIcon({iconClassName, className, interactive}:{iconClassName?: strin
             onTouchStart={() => setLogoHovered(true)}
             onTouchEnd={() => setLogoHovered(false)}
             className={clsx(className, "cursor-cell overflow-hidden transition duration-75 dark:bg-inherit")} href="https://www.instagram.com/alexs_sketchpad/" target="_blank">
-            <LazyLoadImage src={Logo} className={clsx(iconClassName, "aspect-square p-2")} style={{
-                filter: interactive && logoHovered ? "invert(100%) sepia(33%) saturate(0%) hue-rotate(231deg) brightness(106%) contrast(101%)" : presentationMode ? "invert(47%) sepia(9%) saturate(581%) hue-rotate(182deg) brightness(93%) contrast(91%)" : undefined
+            <LazyLoadImage src={Logo} className={clsx(iconClassName, "cursor-cell aspect-square p-2")} style={{
+                filter: style || interactive && logoHovered ? "invert(100%) sepia(33%) saturate(0%) hue-rotate(231deg) brightness(106%) contrast(101%)" : presentationMode ? "invert(47%) sepia(9%) saturate(581%) hue-rotate(182deg) brightness(93%) contrast(91%)" : undefined
             }}/>
         </a>
     )
@@ -79,7 +79,7 @@ function Header(): JSX.Element {
             <Transition
                 show={menuOpen}
                 as="div"
-                className="flex flex-col justify-end items-start md:hidden h-screen w-screen bg-white dark:bg-black fixed z-20"
+                className="flex flex-col justify-end items-start md:hidden h-full w-screen bg-white dark:bg-black fixed z-20"
                 unmount
                 enter="transition-transform ease-in-out duration-150"
                 enterFrom="translate-y-full"
@@ -111,7 +111,7 @@ function Header(): JSX.Element {
                 >
                     <VisibleMenuIcon className={clsx("shrink-0 text-4xl md:text-3xl cursor-cell dark:fill-white")}/>
                 </div>
-                <LogoIcon iconClassName="w-16" className="md:hidden block dark:hover:scale-110 hover:scale-110" />
+                <LogoIcon iconClassName="w-16" className="md:hidden block dark:hover:scale-110 hover:scale-110" style={presentationMode ? {filter: "invert(100%) sepia(33%) saturate(0%) hue-rotate(231deg) brightness(106%) contrast(101%)"} : undefined}/>
                 <div className="p-3 rounded-full bg-inherit"
                      onTouchStart={() => setPresentationHovered(true)}
                      onTouchEnd={() => setPresentationHovered(false)}
