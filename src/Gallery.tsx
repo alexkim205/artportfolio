@@ -68,7 +68,7 @@ function Media({image}: { image: PieceType }): JSX.Element {
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
             >
-                <div className="shrink-0 md:w-[200px]">
+                <div className="shrink-0 md:w-[200px] dark:md:w-[100px] dark:lg:w-[200px] lg:w-[200px]">
                     <Transition
                         as="div"
                         className="flex flex-col gap-1.5 shrink-0"

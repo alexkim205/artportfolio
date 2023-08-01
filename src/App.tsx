@@ -3,11 +3,18 @@ import {Gallery} from "./Gallery";
 import {useActions, useValues} from 'kea'
 import {coreLogic} from "./coreLogic";
 import clsx from "clsx";
-import {PiEyeClosedDuotone, PiEyeDuotone} from "react-icons/pi";
+import {
+    PiArrowsInSimple,
+    PiArrowsVertical,
+    PiDotOutline,
+    PiEyeClosedDuotone,
+    PiEyeDuotone
+} from "react-icons/pi";
 import {useState} from "react";
+import {Transition} from "@headlessui/react";
 
 
-function Sidebar(): JSX.Element {
+function Sidebar({onClick}:{onClick?: ()=>void}): JSX.Element {
     const {currentCategory} = useValues(coreLogic)
     const {setCategory} = useActions(coreLogic)
 
@@ -23,6 +30,7 @@ function Sidebar(): JSX.Element {
                     href={`#${category}`}
                     onClick={() => {
                         setCategory(category)
+                        onClick?.()
                     }}
                 >
                     {category}
@@ -34,19 +42,66 @@ function Sidebar(): JSX.Element {
 function Header(): JSX.Element {
     const {presentationMode} = useValues(coreLogic)
     const {setPresentationMode} = useActions(coreLogic)
-    const Icon = presentationMode ? PiEyeDuotone : PiEyeClosedDuotone
-    const OppositeIcon = presentationMode ? PiEyeClosedDuotone : PiEyeDuotone
-    const [hovered, setHovered] = useState(false)
+    const PresentationIcon = presentationMode ? PiEyeDuotone : PiEyeClosedDuotone
+    const PresentationOppositeIcon = presentationMode ? PiEyeClosedDuotone : PiEyeDuotone
+    const [presentationHovered, setPresentationHovered] = useState(false)
 
-    const VisibleIcon = hovered ? OppositeIcon : Icon
+    const [menuOpen, setMenuOpen] = useState(false)
+    const [menuHovered, setMenuHovered] = useState(false)
+
+    const VisibleMenuIcon = menuHovered ? PiArrowsVertical : PiDotOutline
+    const VisiblePresentationIcon = presentationHovered ? PresentationOppositeIcon : PresentationIcon
 
     return (
-        <div className="flex flex-row justify-end items-center h-12 md:h-16 md:mr-1 w-full md:w-auto fixed z-10 top-0 left-0 right-0 shrink-0 bg-white dark:bg-black md:bg-transparent dark:md:bg-transparent duration-75 transition-colors">
-            <div className="p-3 rounded-full bg-inherit" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}
-                 onClick={() => setPresentationMode(!presentationMode)}>
-                <VisibleIcon className={clsx("shrink-0 text-3xl md:text-3xl cursor-cell dark:fill-white")}/>
+        <>
+            <Transition
+                show={menuOpen}
+                as="div"
+                className="md:hidden h-screen w-screen bg-white dark:bg-black fixed z-20"
+                unmount
+                enter="transition-transform ease-in-out duration-150"
+                enterFrom="-translate-y-full"
+                enterTo="translate-y-0"
+                leave="transition-transform ease-in-out duration-150"
+                leaveFrom="translate-y-0"
+                leaveTo="-translate-y-full"
+            >
+                <div className="p-3">
+                    <PiArrowsInSimple onClick={() => setMenuOpen(false)}
+                                      className={clsx("w-[30px] h-[30px] shrink-0 rotate-[135deg] text-3xl md:text-3xl cursor-cell dark:fill-white")}/>
+                </div>
+                <div
+                    className="flex flex-col px-6 pt-3 pb-6 justify-start items-start gap-1"
+                >
+                    <Sidebar onClick={() => {
+                        setMenuOpen(false)
+                    }}/>
+                </div>
+            </Transition>
+            <div
+                className="flex flex-row justify-between items-center h-14 md:h-16 md:mr-1 w-full md:w-auto fixed z-10 top-0 left-0 right-0 shrink-0 bg-white dark:bg-black md:bg-transparent dark:md:bg-transparent duration-75 transition-colors">
+                <div className="md:invisible p-3 rounded-full bg-inherit"
+                     onTouchStart={() => setMenuHovered(true)}
+                     onTouchEnd={() => setMenuHovered(false)}
+                     onMouseEnter={() => setMenuHovered(true)}
+                     onMouseLeave={() => setMenuHovered(false)}
+                     onClick={() => setMenuOpen(true)}
+                >
+                    <VisibleMenuIcon className={clsx("shrink-0 text-3xl md:text-3xl cursor-cell dark:fill-white")}/>
+                </div>
+                <div className="p-3 rounded-full bg-inherit"
+                     onTouchStart={() => setPresentationHovered(true)}
+                     onTouchEnd={() => setPresentationHovered(false)}
+                     onMouseEnter={() => setPresentationHovered(true)}
+                     onMouseLeave={() => setPresentationHovered(false)}
+                     onClick={() => setPresentationMode(!presentationMode)}
+
+                >
+                    <VisiblePresentationIcon
+                        className={clsx("shrink-0 text-3xl md:text-3xl cursor-cell dark:fill-white")}/>
+                </div>
             </div>
-        </div>
+        </>
     )
 }
 
@@ -56,13 +111,17 @@ function App() {
     return (
         <div className={clsx("w-full flex overflow-hidden flex-row bg-transparent", presentationMode && "dark")}>
             <div className={clsx(
-                "transition-colors min-w-[400px] md:min-w-fit dark:bg-black bg-white duration-75 flex flex-row md:flex-nowrap flex-wrap md:flex-col top-10 md:top-0 left-0 justify-center md:justify-start md:w-fit md:items-start items-center px-3 pt-0 pb-3 py-3 md:px-6 md:py-6 shrink-0 w-full fixed z-20 gap-1 md:gap-0.5",
+                "transition-colors hidden w-auto dark:bg-black bg-white duration-75 md:flex flex-nowrap flex-col top-0 left-0 justify-center items-start p-6 shrink-0 fixed z-20 gap-0.5",
             )}>
                 <Sidebar/>
             </div>
+            <div
+                className="flex flex-col fixed bg-white dark:bg-black h-screen w-screen overflow-x-hidden overflow-y-auto">
+
+            </div>
             <Header/>
             <div
-                className={clsx("flex flex-col relative transition-colors duration-75 justify-start items-center py-24 grow gap-6 md:gap-12 dark:bg-black bg-white")}>
+                className={clsx("flex flex-col relative transition-colors duration-75 justify-start items-center py-16 md:py-24 grow gap-6 md:gap-12 dark:bg-black bg-white")}>
                 <Gallery images={filteredPieces}/>
             </div>
         </div>
