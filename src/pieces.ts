@@ -548,10 +548,20 @@ const _pieces = [
     },
     {
         category: ["animations"],
+        alt: "in betweening hammer animation study",
+        file: 'hammer.mp4',
+        style: {
+            height: 400,
+        },
+        date: dayjs("2023-08-02"),
+        blurb: "In-betweening with context study. This is a common assignment in animation classes, where you start out with two key frames and fill in the frames in between. The two starting frames here are the hammer at the height of its potential energy and the last frame where it's resting on top of the nail. In order to exaggerate the thunk and weight of the hammer crashing down, there is a squash happening on impact and a slow out to regain its original form."
+    },
+    {
+        category: ["animations"],
         alt: "pendulum",
         file: 'arcs.mp4',
         style: {
-            height: 400,
+            height: 300,
         },
         date: dayjs("2023-08-02"),
         blurb: "Arcs are useful when something rotates or moves in space. This study explores favoring key frames and slow ins and outs."
