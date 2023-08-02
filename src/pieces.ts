@@ -546,6 +546,16 @@ const _pieces = [
         date: dayjs("2023-07-24"),
         blurb: "An easy way to study how the energy flows through a material is by drawing a flag flapping in the wind. This is an isolated study of how C and S curves may present themselves in a 3D object."
     },
+    {
+        category: ["animations"],
+        alt: "pendulum",
+        file: 'arcs.mp4',
+        style: {
+            height: 400,
+        },
+        date: dayjs("2023-08-02"),
+        blurb: "Arcs are useful when something rotates or moves in space. This study explores favoring key frames and slow ins and outs."
+    },
 ]
 
 export const pieces: PieceType[] = _pieces.map((_piece) => ({
