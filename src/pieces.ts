@@ -566,6 +566,26 @@ const _pieces = [
         date: dayjs("2023-08-02"),
         blurb: "Arcs are useful when something rotates or moves in space. This study explores favoring key frames and slow ins and outs."
     },
+    {
+        category: ["animations"],
+        alt: "fish swimming",
+        file: 'fish.MP4',
+        style: {
+            height: 400,
+        },
+        date: dayjs("2023-08-04"),
+        blurb: "One of the things I'm finding most difficult to grasp about animation is how to translate real life timing into a rhythm on paper. Movement in real life can be boring and static at times, but uneven and interesting sometimes random movement can be really engaging to look at."
+    },
+    {
+        category: ["animations"],
+        alt: "arm throwing ball",
+        file: 'arm_throw.MP4',
+        style: {
+            height: 400,
+        },
+        date: dayjs("2023-08-05"),
+        blurb: "A single arm throwing a ball. Timing charts which you can see in a few frames were used to plan which parts of the animation needed more frames and slowed down and which could move quickly."
+    },
 ]
 
 export const pieces: PieceType[] = _pieces.map((_piece) => ({
