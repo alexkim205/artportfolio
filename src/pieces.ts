@@ -527,14 +527,14 @@ const _pieces = [
         alt: "three bouncing balls of different materials",
         file: '2.MP4',
         date: dayjs("2023-07-19"),
-        blurb: "Three different balls of different masses. A study of squashing and stretching different materials and slow in/out timings."
+        blurb: "Three different balls of different masses. A study of squashing and stretching different materials and slow in/out timings. Study inspired by Toniko Pantoja's animation course."
     },
     {
         category: ["animations"],
         alt: "moving bouncing ball",
         file: '3.MP4',
         date: dayjs("2023-07-25"),
-        blurb: "A study of a bouncing ball across two planes. Here I add a tail to explore secondary actions that adds some personality to the ball."
+        blurb: "A study of a bouncing ball across two planes. Here I add a tail to explore secondary actions that adds some personality to the ball. Study inspired by Toniko Pantoja's animation course."
     },
     {
         category: ["animations"],
@@ -544,7 +544,7 @@ const _pieces = [
             height: 400,
         },
         date: dayjs("2023-07-24"),
-        blurb: "An easy way to study how the energy flows through a material is by drawing a flag flapping in the wind. This is an isolated study of how C and S curves may present themselves in a 3D object."
+        blurb: "An easy way to study how the energy flows through a material is by drawing a flag flapping in the wind. This is an isolated study of how C and S curves may present themselves in a 3D object. Study inspired by Toniko Pantoja's animation course."
     },
     {
         category: ["animations"],
@@ -554,7 +554,7 @@ const _pieces = [
             height: 400,
         },
         date: dayjs("2023-08-02"),
-        blurb: "In-betweening with context study. This is a common assignment in animation classes, where you start out with two key frames and fill in the frames in between. The two starting frames here are the hammer at the height of its potential energy and the last frame where it's resting on top of the nail. In order to exaggerate the thunk and weight of the hammer crashing down, there is a squash happening on impact and a slow out to regain its original form."
+        blurb: "In-betweening with context study. This is a common assignment in animation classes, where you start out with two key frames and fill in the frames in between. The two starting frames here are the hammer at the height of its potential energy and the last frame where it's resting on top of the nail. In order to exaggerate the thunk and weight of the hammer crashing down, there is a squash happening on impact and a slow out to regain its original form. Study inspired by Toniko Pantoja's animation course."
     },
     {
         category: ["animations"],
@@ -564,7 +564,7 @@ const _pieces = [
             height: 300,
         },
         date: dayjs("2023-08-02"),
-        blurb: "Arcs are useful when something rotates or moves in space. This study explores favoring key frames and slow ins and outs."
+        blurb: "Arcs are useful when something rotates or moves in space. This study explores favoring key frames and slow ins and outs. Study inspired by Toniko Pantoja's animation course."
     },
     {
         category: ["animations"],
@@ -574,7 +574,7 @@ const _pieces = [
             height: 400,
         },
         date: dayjs("2023-08-04"),
-        blurb: "One of the things I'm finding most difficult to grasp about animation is how to translate real life timing into a rhythm on paper. Movement in real life can be boring and static at times, but uneven and interesting sometimes random movement can be really engaging to look at."
+        blurb: "One of the things I'm finding most difficult to grasp about animation is how to translate real life timing into a rhythm on paper. Movement in real life can be boring and static at times, but uneven and interesting sometimes random movement can be really engaging to look at. Study inspired by Toniko Pantoja's animation course."
     },
     {
         category: ["animations"],
@@ -584,7 +584,58 @@ const _pieces = [
             height: 400,
         },
         date: dayjs("2023-08-05"),
-        blurb: "A single arm throwing a ball. Timing charts which you can see in a few frames were used to plan which parts of the animation needed more frames and slowed down and which could move quickly."
+        blurb: "A single arm throwing a ball. Timing charts which you can see in a few frames were used to plan which parts of the animation needed more frames and slowed down and which could move quickly. Study inspired by Toniko Pantoja's animation course."
+    },
+    {
+        category: ["people", "places"],
+        alt: "two people in a subway car",
+        file: 'subway.jpg',
+        date: dayjs("2023-08-10"),
+        blurb: "Two strangers in a subway car minding their own business. Thought it'd be interesting to draw these characters and the background in isolation and bring them together in a sort of collage. The colors and elements and pen styles inevitably clash, but is interesting to look at."
+    },
+    {
+        category: ["nature"],
+        alt: "nature in hudson yards",
+        file: 'trees.jpg',
+        date: dayjs("2023-08-10"),
+        blurb: "Trees in two copic markers. Pockets of nature near Hudson Yards that are man-made and colorless."
+    },
+    {
+        category: ["places"],
+        alt: "collection of items in hudson yards",
+        file: 'hudson.jpg',
+        date: dayjs("2023-08-10"),
+        blurb: "Foreground elements are indistinguishable from the background, and presents a hectic scene of city life. I wanted to overwhelm the viewer with elements that are in-your-face."
+    },
+    {
+        category: ["animations"],
+        alt: "walk cycle front and side profile",
+        file: 'walkfrontside.MP4',
+        style: {
+            height: 400,
+        },
+        date: dayjs("2023-08-07"),
+        blurb: "A study of the walk cycle as seen from the front and side. Any walking character goes through a walk cycle of contact → down → pass → up → contact → down → pass → up → ... Depending on the personality, shape, stride of the character there might be slight variations in each step of this walk, but generally the same rules are followed. Study inspired by Toniko Pantoja's animation course."
+    },
+    {
+        category: ["animations"],
+        alt: "walk cycle different attitudes",
+        file: 'walkcycle.MP4',
+        style: {
+            height: 400,
+        },
+        date: dayjs("2023-08-08"),
+        blurb: "By switching up the timing and body position of the characters in each part of the walk cycle, you can introduce secondary actions to give a little personality to the character. The leftmost stride bounces a extra beat by dipping lower during the up frame, giving it a more bouncy happy go lucky kind of attitude. The rightmost character is hunched over facing downwards, and its legs come up higher than normal to exaggerate the weight of each stomp. Study inspired by Toniko Pantoja's animation course."
+    },
+    {
+        category: ["animations"],
+        alt: "appeal study",
+        file: 'appeals.PNG',
+        style: {
+            maxHeight: 800,
+        },
+        date: dayjs("2023-08-13"),
+        blurb: "What makes a character appealing? It could be a combination of many subtle things, especially when doing a character study for something that is very much non-human like a floursack. Here I exaggerate emotions with body language, asymmetry, and other techniques like using tassles as hands to make the character relatable, expressive, and overall more interesting to look at. Study inspired by Toniko Pantoja's animation course."
     },
 ]
 
@@ -595,7 +646,9 @@ export const pieces: PieceType[] = _pieces.map((_piece) => ({
     style: {..._piece.style}
 })).sort((a, b) => b.date.diff(a.date))
 
-const _categoryToPieces: Record<string, PieceType[]> = {}
+const _categoryToPieces: Record<string, PieceType[]> = {
+    all: pieces
+}
 pieces.forEach((piece) => {
     piece.category.forEach((category) => {
         _categoryToPieces[category] = [...(_categoryToPieces[category] ?? []), piece]
@@ -604,4 +657,4 @@ pieces.forEach((piece) => {
 
 export const categoryToPieces = _categoryToPieces
 
-export const categories = ["all", ...Object.keys(categoryToPieces).sort((a,b) => a.localeCompare(b))]
+export const categories = [...Object.keys(categoryToPieces).sort((a,b) => a.localeCompare(b))]

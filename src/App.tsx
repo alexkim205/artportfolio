@@ -1,4 +1,4 @@
-import {categories} from "./pieces";
+import {categories, categoryToPieces} from "./pieces";
 import {Gallery} from "./Gallery";
 import {useActions, useValues} from 'kea'
 import {coreLogic} from "./coreLogic";
@@ -28,7 +28,7 @@ function Sidebar({onClick}:{onClick?: ()=>void}): JSX.Element {
                 <a
                     key={category}
                     className={clsx(
-                        `px-1 cursor-cell`,
+                        `px-1 cursor-cell flex items-center gap-3`,
                         category === currentCategory ? "text-white bg-blue-700 font-semibold text-lg" : `text-sm dark:text-gray-500 text-gray-500 dark:hover:text-white hover:text-white hover:bg-blue-700`
                     )}
                     href={`#${category}`}
@@ -37,7 +37,7 @@ function Sidebar({onClick}:{onClick?: ()=>void}): JSX.Element {
                         onClick?.()
                     }}
                 >
-                    {category}
+                    {category} <span className={clsx(category === currentCategory ? "text-lg text-white" : "text-xs")}>{categoryToPieces[category]?.length}</span>
                 </a>)}
         </>
     )
@@ -53,7 +53,7 @@ function LogoIcon({iconClassName, className, interactive, style}:{iconClassName?
             onMouseLeave={() => setLogoHovered(false)}
             onTouchStart={() => setLogoHovered(true)}
             onTouchEnd={() => setLogoHovered(false)}
-            className={clsx(className, "cursor-cell overflow-hidden transition duration-75 dark:bg-inherit")} href="https://www.instagram.com/alexs_sketchpad/" target="_blank">
+            className={clsx(className, "cursor-cell overflow-hidden transition duration-75 dark:bg-inherit")} href="https://www.instagram.com/alex.illustrates.k/" target="_blank">
             <LazyLoadImage src={Logo} className={clsx(iconClassName, "cursor-cell aspect-square p-2")} style={{
                 filter: style || interactive && logoHovered ? "invert(100%) sepia(33%) saturate(0%) hue-rotate(231deg) brightness(106%) contrast(101%)" : presentationMode ? "invert(47%) sepia(9%) saturate(581%) hue-rotate(182deg) brightness(93%) contrast(91%)" : undefined
             }}/>
