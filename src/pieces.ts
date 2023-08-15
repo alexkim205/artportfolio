@@ -362,7 +362,7 @@ const _pieces = [
         style: {
             maxHeight: 700,
         },
-        blurb: "The biggest silver back gorilla at the Amsterdam Zoo. I couldn't catch his name but he came up really close to the glass and sat still, almost as if he was asking for me to draw him."
+        blurb: "The biggest silver back gorilla at the Amsterdam Zoo. I couldn't catch his name but he came up really close to the glass and sat still, almost as if he was posing for me."
     },
     {
         category: ["animals", "micro"],
