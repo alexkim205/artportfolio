@@ -13,7 +13,7 @@ import {
 import {CSSProperties, useState} from "react";
 import {Transition} from "@headlessui/react";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import Logo from "../public/android-chrome-192x192.png"
+import Logo from "../public/alex.png"
 
 
 function Sidebar({onClick}:{onClick?: ()=>void}): JSX.Element {
@@ -54,7 +54,7 @@ function LogoIcon({iconClassName, className, interactive, style}:{iconClassName?
             onTouchStart={() => setLogoHovered(true)}
             onTouchEnd={() => setLogoHovered(false)}
             className={clsx(className, "cursor-cell overflow-hidden transition duration-75 dark:bg-inherit")} href="https://www.instagram.com/alex.illustrates.k/" target="_blank">
-            <LazyLoadImage src={Logo} className={clsx(iconClassName, "cursor-cell aspect-square p-2")} style={{
+            <LazyLoadImage src={Logo} className={clsx(iconClassName, "cursor-cell aspect-square px-2 p-0.5 pb-2")} style={{
                 filter: style || interactive && logoHovered ? "invert(100%) sepia(33%) saturate(0%) hue-rotate(231deg) brightness(106%) contrast(101%)" : presentationMode ? "invert(47%) sepia(9%) saturate(581%) hue-rotate(182deg) brightness(93%) contrast(91%)" : undefined
             }}/>
         </a>
