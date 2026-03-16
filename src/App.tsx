@@ -10,31 +10,95 @@ import {
     PiEyeClosedDuotone,
     PiEyeDuotone
 } from "react-icons/pi";
-import {CSSProperties, useState} from "react";
+import {CSSProperties, useEffect, useState} from "react";
 import {Transition} from "@headlessui/react";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import Logo from "../public/alex.png"
+import {ReelPage} from "./ReelPage";
+
+function usePathname(): [string, (to: string) => void] {
+    const [pathname, setPathname] = useState(() => window.location.pathname || "/")
+
+    useEffect(() => {
+        const onPopState = () => setPathname(window.location.pathname || "/")
+        window.addEventListener("popstate", onPopState)
+        return () => window.removeEventListener("popstate", onPopState)
+    }, [])
+
+    const navigate = (to: string) => {
+        if (to === (window.location.pathname || "/")) {
+            return
+        }
+        window.history.pushState({}, "", to)
+        setPathname(to)
+        window.scrollTo({top: 0, behavior: "auto"})
+    }
+
+    return [pathname, navigate]
+}
 
 
-function Sidebar({onClick}:{onClick?: ()=>void}): JSX.Element {
+function Sidebar({onClick, pathname, navigate}:{onClick?: ()=>void, pathname: string, navigate: (to: string) => void}): JSX.Element {
     const {currentCategory} = useValues(coreLogic)
     const {setCategory} = useActions(coreLogic)
+    const reelSelected = pathname === "/reel"
 
     return (
         <>
             <LogoIcon iconClassName="w-24" className="hidden md:block dark:hover:bg-blue-700 hover:bg-blue-700 mb-1" interactive/>
+
+            <a
+                className={clsx(
+                    `px-1 cursor-cell flex items-center gap-3`,
+                    reelSelected
+                        ? "text-white bg-blue-700 font-semibold text-lg"
+                        : `text-sm dark:text-gray-500 text-gray-500 dark:hover:text-white hover:text-white hover:bg-blue-700`
+                )}
+                href="/reel"
+                onClick={(e) => {
+                    e.preventDefault()
+                    navigate("/reel")
+                    onClick?.()
+                }}
+            >
+                Reel
+            </a>
+
+            <a
+                className={clsx(
+                    `px-1 cursor-cell flex items-center gap-3`,
+                    !reelSelected
+                        ? "text-white bg-blue-700 font-semibold text-lg"
+                        : `text-sm dark:text-gray-500 text-gray-500 dark:hover:text-white hover:text-white hover:bg-blue-700`
+                )}
+                href="/"
+                onClick={(e) => {
+                    e.preventDefault()
+                    navigate("/")
+                    onClick?.()
+                }}
+            >
+                Art
+            </a>
 
             {categories.map(category =>
                 <a
                     key={category}
                     className={clsx(
                         `px-1 cursor-cell flex items-center gap-3`,
-                        category === currentCategory ? "text-white bg-blue-700 font-semibold text-lg" : `text-sm dark:text-gray-500 text-gray-500 dark:hover:text-white hover:text-white hover:bg-blue-700`
+                        !reelSelected && category === currentCategory
+                            ? "text-white bg-blue-700 font-semibold text-lg"
+                            : `text-sm dark:text-gray-500 text-gray-500 dark:hover:text-white hover:text-white hover:bg-blue-700`
                     )}
-                    href={`#${category}`}
-                    onClick={() => {
+                    href={`/#${category}`}
+                    onClick={(e) => {
+                        e.preventDefault()
+                        if (reelSelected) {
+                            navigate("/")
+                        }
                         setCategory(category)
                         onClick?.()
+                        window.location.hash = category
                     }}
                 >
                     {category} <span className={clsx(category === currentCategory ? "text-lg text-white" : "text-xs")}>{categoryToPieces[category]?.length}</span>
@@ -53,7 +117,7 @@ function LogoIcon({iconClassName, className, interactive, style}:{iconClassName?
             onMouseLeave={() => setLogoHovered(false)}
             onTouchStart={() => setLogoHovered(true)}
             onTouchEnd={() => setLogoHovered(false)}
-            className={clsx(className, "cursor-cell overflow-hidden transition duration-75 dark:bg-inherit")} href="https://www.instagram.com/alex.illustrates.k/" target="_blank">
+            className={clsx(className, "cursor-cell overflow-hidden transition duration-75 dark:bg-inherit")} href="https://www.instagram.com/alex.animates.mmk/" target="_blank">
             <LazyLoadImage src={Logo} className={clsx(iconClassName, "cursor-cell aspect-square px-2 p-0.5 pb-2")} style={{
                 filter: style || interactive && logoHovered ? "invert(100%) sepia(33%) saturate(0%) hue-rotate(231deg) brightness(106%) contrast(101%)" : presentationMode ? "invert(47%) sepia(9%) saturate(581%) hue-rotate(182deg) brightness(93%) contrast(91%)" : undefined
             }}/>
@@ -61,7 +125,7 @@ function LogoIcon({iconClassName, className, interactive, style}:{iconClassName?
     )
 }
 
-function Header(): JSX.Element {
+function Header({pathname, navigate}: { pathname: string, navigate: (to: string) => void }): JSX.Element {
     const {presentationMode} = useValues(coreLogic)
     const {setPresentationMode} = useActions(coreLogic)
     const PresentationIcon = presentationMode ? PiEyeDuotone : PiEyeClosedDuotone
@@ -93,7 +157,7 @@ function Header(): JSX.Element {
                 >
                     <Sidebar onClick={() => {
                         setMenuOpen(false)
-                    }}/>
+                    }} pathname={pathname} navigate={navigate}/>
                 </div>
                 <div className="flex justify-center items-center p-3 rounded-full bg-inherit h-[72px] ">
                     <PiArrowsInSimple onClick={() => setMenuOpen(false)}
@@ -130,23 +194,28 @@ function Header(): JSX.Element {
 
 function App() {
     const {filteredPieces, presentationMode} = useValues(coreLogic)
+    const [pathname, navigate] = usePathname()
 
     return (
         <div className={clsx("w-full flex overflow-hidden flex-row bg-transparent", presentationMode && "dark")}>
             <div className={clsx(
                 "transition-colors hidden w-auto dark:bg-black bg-white duration-75 md:flex flex-nowrap flex-col top-0 left-0 justify-center items-start p-6 shrink-0 fixed z-20 gap-0.5",
             )}>
-                <Sidebar/>
+                <Sidebar pathname={pathname} navigate={navigate}/>
             </div>
             <div
                 className="flex flex-col fixed bg-white dark:bg-black h-screen w-screen overflow-x-hidden overflow-y-auto">
 
             </div>
-            <Header/>
-            <div
-                className={clsx("flex flex-col relative transition-colors duration-75 justify-start items-center pb-16 md:py-32 grow gap-6 md:gap-12 dark:bg-black bg-white")}>
-                <Gallery images={filteredPieces}/>
-            </div>
+            <Header pathname={pathname} navigate={navigate}/>
+            {pathname === "/reel" ? (
+                <ReelPage/>
+            ) : (
+                <div
+                    className={clsx("flex flex-col relative transition-colors duration-75 justify-start items-center pb-16 md:py-32 grow gap-6 md:gap-12 dark:bg-black bg-white")}>
+                    <Gallery images={filteredPieces}/>
+                </div>
+            )}
         </div>
     )
 }
